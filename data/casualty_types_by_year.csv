@@ -1,0 +1,44 @@
+ctype,2021,2022,2023,2024,2025,group
+Aircraft,14,9,7,12,4,other or unknown
+Angler from boat,77,94,90,82,84,powered and sail craft
+Angler from shore,25,17,32,28,41,people on the shore
+Animal (dog),57,66,76,56,53,people on the shore
+Animal (other),38,40,48,42,41,people on the shore
+Bodyboard,19,18,14,13,11,paddle and board craft
+Climber,33,28,26,28,37,people on the shore
+Coasteerer,6,11,6,6,2,people on the shore
+Commercial activity,69,77,88,57,78,commercial
+Commercial fishing,351,292,272,250,272,commercial
+Distress signals,7,5,2,10,4,other or unknown
+Diving vessel,11,12,20,20,9,powered and sail craft
+False alarm,334,340,303,365,315,other or unknown
+Inflatable,94,71,61,61,48,powered and sail craft
+Jet ski,91,92,80,57,72,powered and sail craft
+Kayak/canoe,206,195,162,166,128,paddle and board craft
+Kitesurf,50,56,54,41,32,paddle and board craft
+Mass rescue,0,27,23,10,30,other or unknown
+Motor vehicle,8,7,7,11,7,people on the shore
+Motorboat,1192,1198,1100,963,954,powered and sail craft
+Multiple persons on the water,92,190,50,21,37,people in the water
+Object in the sea,4,6,2,1,5,other or unknown
+Other,727,901,1129,1475,1923,other or unknown
+Paddleboard,140,173,155,132,160,paddle and board craft
+Person ashore,1008,1085,829,931,555,people on the shore
+Person in distress,544,622,661,690,632,other or unknown
+Person in water,1201,1178,1278,1362,945,people in the water
+Person on craft,338,379,401,343,378,other or unknown
+Rowing boat,24,33,23,27,17,powered and sail craft
+Sailing dinghy,52,41,44,38,53,powered and sail craft
+Sailing vessel,711,832,855,725,713,powered and sail craft
+Scuba diver,28,14,18,30,16,people in the water
+Skimboard,1,0,0,0,0,paddle and board craft
+Surfboard,25,13,10,13,19,paddle and board craft
+Swimmer,156,137,137,119,142,people in the water
+Tombstoner,11,12,21,5,18,people in the water
+Unknown,0,0,0,2,70,other or unknown
+Unknown craft,316,309,318,312,368,other or unknown
+Unknown person,306,322,327,279,363,other or unknown
+Walker/runner,384,304,366,312,320,people on the shore
+Waterside activity,88,79,74,57,84,people on the shore
+Waterskier,3,1,1,2,4,powered and sail craft
+Windsurf,42,30,35,35,36,paddle and board craft

@@ -1,0 +1,136 @@
+<!-- wp:paragraph -->
+<p><em>Every time an RNLI lifeboat launches, the crew fills in a record of where they went, for whom and when. I took all {{n|int}} launches from 2021 to 2025 and mapped the ones with a position. Most rescues happen within a few kilometres of the station, summer belongs to leisure boats, and the busiest station of all is not on the sea.</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://maps.tristanhotham.com/lifeboat-launches/">Explore the interactive version</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://doi.org/10.5281/zenodo.24104520">Read the paper</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:paragraph -->
+<p>When a pager goes off at a lifeboat station, volunteers leave their work, their dinner or their bed and run for the boat. The RNLI, the charity that runs the lifeboats around the UK and Ireland, publishes a record of each launch afterwards: the station, the boat, the time, the sea, the kind of casualty, what happened, and the position of the incident. That makes it possible to ask some simple questions of five years of rescues. Where do the boats go? How far? For whom, and when?</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Between 2021 and 2025 there were {{n|int}} launches from {{n_stations|int}} stations, about {{per_day|f0}} a day. A handful of positions needed fixing: {{flow.flipped|int}} had lost the minus sign on their longitude, so that a launch from Fishguard appeared in the Netherlands, and {{flow.loc_err|int}} were impossible and were left off the map. That leaves {{n_located|int}} launches with a place.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">A thin orange line around the islands</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Put on a map, the launches trace the coast. They are thickest along the south coast of England, on the Thames, around Poole, in the Firth of Forth and on the Fylde coast at Blackpool. They are also bunched: on a grid of 2 km squares, half of all the launches fell in just {{cells.half_cells|int}} of the {{cells.n_cells|int}} squares that saw any at all.</p>
+<!-- /wp:paragraph -->
+
+{{IMG|b_map.png|Map of Britain and Ireland with lifeboat launches counted on 4 km squares, forming a thin orange band around every coast, darkest along the south coast of England and on the Thames|Every located RNLI lifeboat launch, 2021 to 2025, on 4 km squares. Rings are stations.}}
+
+<!-- wp:paragraph -->
+<p>The busiest place of all is a river. Tower lifeboat station, beside Waterloo Bridge in central London, launched {{stations_conc.tower|int}} times in five years, about {{prose.tower_per_day|f1}} times a day and {{prose.tower_pc|f1}}% of every launch in the data. Add Chiswick, Teddington and Gravesend and the Thames makes {{stations_conc.thames_pc|f1}}% of all launches. The three busiest 2 km squares in the whole data are all on the river near Tower.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Most rescues are close to home</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Half of all launches went less than {{dist.all_types.med|f1}} km from the station in a straight line, and {{dist.all_types.within10|f0}}% less than 10 km. Only {{dist.all_types.over20|f1}}% went more than 20 km.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The kind of boat matters. All-weather lifeboats are big, fast and built for any sea; inshore lifeboats are smaller inflatable or rigid-hulled boats for shallow water, surf and rocks. The typical inshore launch went {{dist.ILB.med|f1}} km, the typical all-weather launch {{dist.ALB.med|f1}} km. Comparing the two boats at the same station, the all-weather boat went {{H12.alb.b|f0}}% further, and at {{paired.alb_further|int}} of the {{paired.n|int}} stations busy enough to compare, its typical trip was the longer one.</p>
+<!-- /wp:paragraph -->
+
+{{IMG|b_dist.png|Two charts: the share of launches within each distance of the station, with inshore boats reaching half their launches by 3.5 km and all-weather boats by 9.3 km, and the typical distance for each kind of casualty|How far the boats went, by kind of boat and kind of casualty.}}
+
+<!-- wp:paragraph -->
+<p>Fishing boats and other commercial casualties were further out than people in the water, by {{H12.commercial.b|f0}}% at the same station. I expected motorboats and yachts to be further out too, but they were not: most leisure boating seems to happen close to the harbours where lifeboat stations are.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Summer, weekends and afternoons</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>August is the busiest month, with about {{season_all.aug_per_day|f0}} launches a day against {{season_all.jan_per_day|f0}} in January. But the summer rush belongs to people at play. Launches to motorboats, yachts and dinghies were {{H3.powered and sail craft.rr|f1}} times as frequent in June to August as in December to February. For kayaks, paddleboards and other boards it was {{H3.paddle and board craft.rr|f1}} times, and for commercial casualties only {{H3.commercial.rr|f1}} times.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Weekends tell the same story. A Saturday or Sunday brought about {{H3b.paddle and board craft.rr|f1}} times the launches of a weekday for paddle and board craft and {{H3b.powered and sail craft.rr|f1}} times for motorboats and yachts. Commercial casualties were a little busier at weekends too ({{H3b.commercial.rr|f2}} times), which I had not expected.</p>
+<!-- /wp:paragraph -->
+
+{{IMG|b_season.png|Line chart of launches by month for six kinds of casualty, with motorboats and yachts and paddle and board craft rising sharply to an August peak while commercial casualties stay much flatter, and a bar chart of weekend against weekday rates|Each group's launches per day by month, against its own yearly average, and weekends against weekdays.}}
+
+<!-- wp:pullquote -->
+<figure class="wp-block-pullquote"><blockquote><p>The busiest RNLI lifeboat station is not on the sea at all. It is on the Thames, in central London.</p></blockquote></figure>
+<!-- /wp:pullquote -->
+
+<!-- wp:paragraph -->
+<p>The busiest hour to launch is {{hour_all.peak|int}}:00 to {{hour_all.peak|int}}:59. About {{dark.all.pc|f0}}% of launches were in the dark, and for people on the shore {{dark.people on the shore.pc|f0}}%. Paddle and board craft almost never needed a lifeboat after dark: {{dark.paddle and board craft.pc|f1}}% of their launches.</p>
+<!-- /wp:paragraph -->
+
+{{IMG|b_hour.png|Line chart of launches by hour of the day, peaking in the afternoon with a sharp paddle and board peak at 15:00, and bars showing the share of each kind of launch made in the dark|Launches by hour, and the share made after dusk.}}
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Busy stations are not the ones with most coast</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>I gave every kilometre of coastline to its nearest lifeboat station. A station with twice as much coast had only about {{prose.h6_double|f0}}% more launches, a difference the data cannot tell apart from none. The busiest stations for their stretch of coast are on crowded shores: {{per10.top.0.station}}, {{per10.top.1.station}}, {{per10.top.2.station}} and {{per10.top.3.station}}. The quietest are in Shetland, Harris, the north-west Highlands and the west of Ireland, where one station is nearest to hundreds of kilometres of ragged coast. Coast length on its own is a poor guide to where the lifeboats are needed. (Coast length is slippery anyway: measure it on a more detailed map and it grows, which is why I checked the result at two map scales.)</p>
+<!-- /wp:paragraph -->
+
+{{IMG|b_coast.png|Scatter chart of launches against coast length for 228 coastal stations, showing almost no relationship, beside a bar chart of the busiest stations per 10 km of coast led by Blackpool, Ramsgate and Torbay|Launches against the length of coast nearest each station.}}
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Flat, with shifting labels</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The total hardly changed: {{prose.total_2021|int}} launches in 2021 and {{prose.total_2025|int}} in 2025. I expected paddleboarding to push launches up, but launches to paddle and board craft fell by about {{H5.paddle and board craft.b|abs0}}% a year, and paddleboards on their own showed no clear trend either way. There is a catch, though. Over the same years the share of launches recorded with the casualty type "Other" rose from {{prose.other_2021|f0}}% to {{prose.other_2025|f0}}%. Some of the falls in other groups may simply be launches labelled differently, so I would not read them as real declines.</p>
+<!-- /wp:paragraph -->
+
+{{IMG|b_trend.png|Small bar charts of launches per year from 2021 to 2025: all launches flat, most groups gently falling and the other or unknown group rising, with a line showing the share labelled Other climbing from 8 to 21 percent|Launches by year and kind of casualty.}}
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">How I did this</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The launch records are the RNLI's Returns of Service, from its open data portal. I wrote down the questions, the comparisons and the checks before computing any of the results, and I report what came out, including where my expectations were wrong. Distances are straight lines from the station to the incident, not the route the boat took. The comparisons of boats and casualties are made within each station, and the two main ones (all-weather against inshore boats, commercial casualties against people in the water) hold when I drop the river and lake stations, the corrected positions, launches stood down before arriving, or each region in turn. The paper has the details.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Some things this cannot tell us. A launch is not an incident: two boats sent to one yacht make two records, and many emergencies are handled by coastguard helicopters, lifeguards, other services or passers-by. The records do not say how many people were on the water, so busier summers partly reflect more people out. Positions are as recorded by the crews. And because the RNLI's licence does not allow the individual records to be shared, the map and the data files show launches counted on 1 km squares.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://maps.tristanhotham.com/lifeboat-launches/">Explore the interactive version</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://doi.org/10.5281/zenodo.24104520">Read the paper</a></div>
+<!-- /wp:button -->
+<!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://github.com/Tristan-Hotham/lifeboat-launches">Data and code</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading">Notes and sources</h3>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>RNLI Returns of Service and RNLI Lifeboat Station Locations, RNLI open data portal, retrieved 2026, under the RNLI open data licence. Coastlines from Natural Earth (public domain). Base map on the interactive page: OpenFreeMap, OpenStreetMap contributors (ODbL).</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Background: M. Wright, How the RNLI is using geomatics to save lives, RICS Land Journal (2021); Open Data Institute, Case study: sharing data to improve the safety of lives at sea (2021); B. Mandelbrot, How long is the coast of Britain?, Science (1967).</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->

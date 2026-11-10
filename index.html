@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Where the lifeboats go | 45,673 RNLI lifeboat launches mapped</title>
+<meta name="description" content="Every RNLI lifeboat launch from 2021 to 2025 that has a location: where the boats went, how far, for whom, and when. 45,673 launches from 238 stations.">
+<meta property="og:title" content="Where the lifeboats go">
+<meta property="og:description" content="Half of all RNLI lifeboat launches went less than 4.5 km from the station. All-weather boats went 2.6 times as far as inshore boats.">
+<meta property="og:image" content="https://maps.tristanhotham.com/lifeboat-launches/header.png">
+<meta property="og:url" content="https://maps.tristanhotham.com/lifeboat-launches/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+:root{--bg:#F6EED8;--panel:#EFE3C4;--fg:#2B2119;--muted:#6E604E;--rule:#E2D3AE;--card:#FBF5E4;--border:#D3C29A;--hot:#B4442E;--cool:#2F6A9E;
+  --display:"Fraunces",Georgia,serif;--body:"Source Serif 4",Georgia,serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1A1612;--panel:#241E18;--fg:#EFE6D4;--muted:#ADA08B;--rule:#3A3128;--card:#211B15;--border:#4D4234;--hot:#E07A6C;--cool:#8FB4DA;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1A1612;--panel:#241E18;--fg:#EFE6D4;--muted:#ADA08B;--rule:#3A3128;--card:#211B15;--border:#4D4234;--hot:#E07A6C;--cool:#8FB4DA;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.62 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+.wrap{max-width:720px;margin:0 auto;padding-block:28px 64px}
+a{color:inherit;text-decoration-color:var(--hot);text-underline-offset:3px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kicker b{background:var(--hot);color:#fff;padding:5px 8px;font-weight:500}
+h2{font:800 34px/1.04 var(--display);letter-spacing:-.01em;margin:54px 0 10px;text-wrap:balance}
+h2 .n{font:500 13px/1 var(--mono);color:var(--hot);display:block;letter-spacing:.1em;margin-bottom:10px}
+p{margin:0 0 16px}
+.byline{font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:14px}
+.src{font:400 12px/1.45 var(--mono);color:var(--muted);margin-top:10px}
+ul.plain{padding-left:20px} ul.plain li{margin:4px 0}
+details{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:10px 0;margin:18px 0;font-size:16px}
+summary{font:500 13px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;color:var(--muted)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 0}
+.cta a{font:500 13px/1 var(--mono);text-decoration:none;border:1px solid var(--fg);padding:11px 14px;border-radius:3px}
+.cta a.p{background:var(--hot);border-color:var(--hot);color:#fff}
+footer{border-top:6px double var(--fg);margin-top:56px;padding-top:16px;font:400 13px/1.55 var(--mono);color:var(--muted)}
+footer p{margin:0 0 10px}
+.theme{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:4px 8px;cursor:pointer;min-height:28px}
+.figure{margin:22px 0}.figure img{width:100%;display:block;border:1px solid var(--border);background:#F6EED8}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:22px 0}
+.stat b{display:block;font:900 40px/1 var(--display);color:var(--hot)}
+.stat span{font:400 13px/1.35 var(--mono);color:var(--muted)}
+table.t{width:100%;border-collapse:collapse;font:400 13.5px/1.4 var(--mono);margin:12px 0 4px}
+table.t th{text-align:left;font-weight:500;border-bottom:2px solid var(--fg);padding:5px 6px 5px 0}
+table.t td{border-bottom:1px solid var(--rule);padding:5px 6px 5px 0;vertical-align:top}
+table.t td.r,table.t th.r{text-align:right}
+.tscroll{overflow-x:auto}
+.topbar{height:40px;display:flex;align-items:center;gap:14px;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:0 max(14px,env(safe-area-inset-left,0px));border-bottom:3px double var(--fg);background:var(--bg);overflow:hidden;white-space:nowrap}
+.tb-name{font:800 18px/1 var(--display);color:var(--hot);text-decoration:none}
+.tb-k{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tb-links{margin-left:auto;display:flex;gap:16px;align-items:center;font:500 12px/1 var(--mono)}
+.tb-links a{text-decoration:none}
+.mapband{width:100vw;margin-left:calc(50% - 50vw)}
+.pane{position:relative;height:calc(100vh - 43px);height:calc(100svh - 43px);min-height:480px;border-bottom:1px solid #BCA676;background:#EEF1F2;overflow:hidden}
+#map{position:absolute;inset:0}
+.cartouche{position:absolute;left:14px;top:14px;z-index:5;max-width:min(340px,calc(100% - 28px));background:rgba(251,243,220,.96);color:#2B2119;border:2px solid #2B2119;padding:10px 14px;box-shadow:0 3px 14px rgba(60,40,10,.22)}
+.cartouche h1{font:900 clamp(22px,2.3vw,30px)/1 var(--display);letter-spacing:-.015em;margin:6px 0 0;color:#2B2119}
+.cartouche h1 .a{color:#B4442E}
+.cartouche .dek{font-size:13.5px;line-height:1.36;margin:6px 0 0}
+.cartouche .byline{font-size:11px;color:#6E604E;margin-top:6px}.cartouche .kicker{color:#6E604E}
+.ct-fold{position:absolute;right:6px;top:5px;width:26px;height:26px;border:0;background:none;color:#B4442E;font:700 16px/1 var(--mono);cursor:pointer;padding:0}
+.ct-toggle{display:none;font:800 16px/1 var(--display);color:#B4442E;background:none;border:0;padding:2px 0;cursor:pointer;min-height:30px}
+.cartouche.folded .ct-body,.cartouche.folded .ct-fold{display:none}.cartouche.folded .ct-toggle{display:block}.cartouche.folded{padding:4px 11px}
+.ov-top{position:absolute;z-index:6;right:54px;top:10px;max-width:calc(100% - 480px);display:flex;flex-direction:column;gap:6px;align-items:flex-end;pointer-events:none;font:400 13px/1.3 var(--mono);color:#2B2119}
+.ov-top>*{pointer-events:auto}
+.srch{position:relative;width:min(340px,100%)}
+.srch input{width:100%;font:400 15px/1 var(--mono);background:rgba(251,245,228,.97);color:#2B2119;border:1px solid #9C8656;border-radius:3px;padding:9px 10px;min-height:40px}
+.sug{position:absolute;left:0;right:0;top:100%;margin:2px 0 0;padding:0;list-style:none;background:#FBF5E4;border:1px solid #9C8656;max-height:300px;overflow:auto;display:none;z-index:12}
+.sug li{padding:8px 10px;cursor:pointer;border-bottom:1px solid #E7D9B6}.sug li span{color:#7A6A52;font-size:12px}
+.sug li[aria-selected="true"],.sug li:hover{background:#EFE1BC}
+.chips{display:flex;gap:6px;overflow-x:auto;max-width:100%;scrollbar-width:none;padding-bottom:2px}.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;font:500 12px/1 var(--mono);background:rgba(251,245,228,.95);color:#2B2119;border:1px solid #9C8656;border-radius:999px;padding:8px 11px;cursor:pointer;min-height:34px;white-space:nowrap}
+.chip[aria-pressed="true"]{background:#B4442E;color:#fff;border-color:#2B2119}
+.chip.lyr{background:#2B2119;color:#F6EED8;border-color:#2B2119}
+.lp{position:absolute;right:54px;top:60px;z-index:9;background:rgba(251,245,228,.98);border:1px solid #9C8656;border-radius:4px;padding:10px 12px 8px;font:400 13px/1.3 var(--mono);color:#2B2119;box-shadow:0 3px 12px rgba(60,40,10,.25);display:none;min-width:250px}
+.lp.open{display:block}.lp h4{margin:0 0 6px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#7A6A52}
+.lp label{display:flex;gap:8px;align-items:center;padding:5px 0;cursor:pointer;min-height:30px}.lp input{accent-color:#B4442E;width:16px;height:16px;flex:none}
+.keys{position:absolute;left:12px;bottom:12px;z-index:4;background:rgba(251,243,220,.96);border:1px solid #9C8656;border-radius:3px;padding:8px 10px;font:400 11.5px/1.25 var(--mono);color:#2B2119;max-width:270px}
+.keys b{display:block;font:800 14px/1.1 var(--display);margin-bottom:5px}
+.keys .bar{height:10px;border:1px solid rgba(43,33,25,.4)}
+.keys .ends{display:flex;justify-content:space-between;font-size:10.5px;color:#6E604E;margin-top:2px}
+.keys .row{display:flex;align-items:center;gap:6px;margin-top:5px}.keys .dot{width:10px;height:10px;border-radius:50%;background:#B9B4AA;border:1px solid #fff;box-shadow:0 0 0 1px #888}
+.maplibregl-popup-content{background:#FBF5E4;color:#2B2119;font:400 13px/1.45 var(--mono);border:1px solid #9C8656;border-radius:4px;padding:10px 12px;max-width:320px;max-height:44vh;overflow:auto}
+.maplibregl-popup-content b.t{display:block;font:800 19px/1.15 var(--display);color:#B4442E;margin-bottom:3px;padding-right:14px}
+.maplibregl-popup-content table{border-collapse:collapse;margin:5px 0}.maplibregl-popup-content td{padding:1px 8px 1px 0;vertical-align:top}
+.maplibregl-popup-content td:first-child{color:#7A6A52}.maplibregl-popup-content .nt{color:#7A6A52;font-size:11.5px;margin:5px 0 0}
+.maplibregl-popup-content a{color:#B4442E}
+.maplibregl-ctrl-attrib{font:400 11px/1.3 var(--mono)!important}
+.nojs{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 14px var(--mono);color:#6E604E;padding:20px;text-align:center}
+@media (max-width:1000px){.ov-top{left:10px;right:54px;max-width:none;align-items:flex-start}.lp{left:10px;right:auto;top:100px}.cartouche{top:100px}}
+@media (max-width:600px){.tb-k,.tb-links a.x{display:none}.topbar{gap:10px}.tb-name{font-size:15px}.tb-links{gap:10px}
+  .lp{left:8px;right:8px;min-width:0}.ov-top{left:8px;top:8px}.cartouche{left:8px;top:100px;max-width:calc(100% - 16px)}.cartouche h1{font-size:23px}
+  .ct-toggle{display:block}.ct-fold{display:none}.keys{max-width:200px;font-size:10.5px;padding:6px 8px}.chip{padding:8px 8px;font-size:11.5px}.keys .kx{display:none}.chips{flex-wrap:wrap}.cartouche{top:150px}}
+.maplibregl-popup{z-index:7}
+.tl{position:absolute;left:12px;right:60px;bottom:12px;z-index:5;display:flex;align-items:center;gap:10px;background:rgba(251,243,220,.96);border:1px solid #9C8656;border-radius:3px;padding:6px 10px;font:400 12px/1.2 var(--mono);color:#2B2119;max-width:560px}
+.tl input[type=range]{flex:1;accent-color:#B4442E;min-width:80px}
+.tl b{font:800 15px/1 var(--display);min-width:92px;text-align:center}
+.tl button{font:500 12px/1 var(--mono);background:#2B2119;color:#F6EED8;border:0;border-radius:3px;padding:7px 9px;cursor:pointer;min-height:30px}
+.keys{bottom:64px}
+.spark{display:block;margin:6px 0 2px}
+.maplibregl-popup-content .pl{border-top:1px solid #E2D3AE;margin-top:6px;padding-top:6px}
+@media (max-width:600px){.tl{left:8px;right:52px;bottom:8px;gap:6px;padding:5px 7px}.tl b{min-width:70px;font-size:13px}.keys{bottom:56px}}
+.flt{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flt select{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:6px 6px;min-height:30px;max-width:180px}
+.keys .sw{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:1px solid #fff}
+.keys .heat{height:10px;border-radius:2px;background:linear-gradient(90deg,rgba(242,197,139,.2),#F2C58B,#E07A1F,#B4442E,#6B1F2A);margin:4px 0 2px}
+.bars{display:flex;gap:3px;align-items:flex-end;height:46px;margin:6px 0 2px}.bars i{display:block;width:30px;background:#2F6A9E;position:relative}
+.bars i span{position:absolute;bottom:-15px;left:0;font:400 10px/1 var(--mono);color:#6E604E}
+.gbar{display:flex;height:10px;border-radius:2px;overflow:hidden;margin:6px 0}.gbar i{display:block;height:100%}
+.keys{bottom:12px}
+@media (max-width:600px){.keys{bottom:8px;max-width:180px}.flt select{max-width:118px;font-size:11px}}
+.maplibregl-popup-content{max-height:62vh;overflow:auto}
+
+</style></head>
+<body>
+<div class="topbar">
+  <a class="tb-name" href="#mapWrap">Where the lifeboats go</a>
+  <span class="tb-k">Data study · 2026</span>
+  <nav class="tb-links"><a href="#essay">About</a><button class="theme" id="theme" aria-label="Toggle dark mode">◐</button><a href="https://doi.org/10.5281/zenodo.24104520">Paper</a><a class="x" href="https://github.com/Tristan-Hotham/lifeboat-launches">Data and code</a></nav>
+</div>
+<div class="mapband">
+  <div class="pane" id="mapWrap" data-fullscreen-map role="application" aria-label="Map of RNLI lifeboat launches 2021 to 2025 with lifeboat stations">
+    <div id="map"></div>
+    <div class="nojs" id="nojs">Loading the map. It needs JavaScript and WebGL.</div>
+    <div class="cartouche" id="cartouche">
+      <button class="ct-toggle" id="ctToggle" aria-expanded="true">Where the lifeboats go ▾</button>
+      <button class="ct-fold" id="ctFold" title="Fold the title" aria-label="Fold the title">▴</button>
+      <div class="ct-body">
+        <div class="kicker"><b>Data study</b><span>2026</span></div>
+        <h1>Where the <span class="a">lifeboats go</span></h1>
+        <p class="dek">Every RNLI lifeboat launch from 2021 to 2025 with a location, 45,650 of them, counted on 1 km squares around the coasts of the UK, Ireland, the Isle of Man and the Channel Islands. Rings are the 238 stations, sized by launches. Filter by year, boat or casualty; tap a ring or a square.</p>
+        <div class="byline">Dr Tristan Hotham · Independent researcher · 2026</div>
+      </div>
+    </div>
+    <div class="ov-top">
+      <div class="srch"><input type="search" id="q" placeholder="Find a lifeboat station" aria-label="Find a lifeboat station" autocomplete="off"><ul class="sug" id="sug" role="listbox"></ul></div>
+      <div class="chips flt">
+        <select id="fy" aria-label="Year"><option value="-1">All years</option><option value="0">2021</option><option value="1">2022</option><option value="2">2023</option><option value="3">2024</option><option value="4">2025</option></select>
+        <select id="fb" aria-label="Boat type"><option value="-1">All boats</option><option value="0">All-weather</option><option value="1">Inshore</option><option value="2">Hovercraft, water craft</option></select>
+        <select id="fg" aria-label="Casualty"><option value="-1">All casualties</option><option value="0">Commercial</option><option value="1">Powered and sail craft</option><option value="2">Paddle and board craft</option><option value="3">People in the water</option><option value="4">People on the shore</option><option value="5">Other or unknown</option></select>
+        <button class="chip lyr" id="lyrBtn" aria-expanded="false" aria-controls="lp">Layers</button>
+      </div>
+    </div>
+    <div class="lp" id="lp" role="dialog" aria-label="Map layers">
+      <h4>Layers</h4>
+      <label><input type="checkbox" id="lyH" checked> Launch density (heat)</label>
+      <label><input type="checkbox" id="lyC" checked> Launches on 1 km squares</label>
+      <label><input type="checkbox" id="lyS" checked> Lifeboat stations</label>
+      <label><input type="checkbox" id="lyK"> Coast shaded by station workload</label>
+      <label><input type="checkbox" id="lyL" checked> Station names (close in)</label>
+      <label><input type="checkbox" id="lyB" checked> Base map labels</label>
+    </div>
+    <div class="keys" id="keys"><b id="keyTitle">Lifeboat launches</b><div class="heat"></div><div class="ends"><span>few</span><span>many</span></div>
+      <div class="row"><span class="sw" style="background:#E07A1F"></span>1 km square, size by launches</div>
+      <div class="row"><span class="sw" style="background:transparent;border:2px solid #1D3F6E"></span>station with an all-weather boat</div>
+      <div class="row"><span class="sw" style="background:transparent;border:2px solid #E07A1F"></span>inshore boats only</div>
+      <div class="row kx" id="keyK" style="display:none"><span class="sw" style="background:#2F6A9E"></span>coast: station launches per 10 km of coast (pale few, dark blue many)</div>
+      <div class="row kx" style="color:#6E604E;display:block">RNLI waters: UK, Ireland, Isle of Man, Channel Islands.<br><span id="nshow"></span></div></div>
+  </div>
+</div>
+<div class="wrap" id="essay">
+<p style="margin-top:6px">When a pager goes off at a lifeboat station, volunteers drop what they are doing and run for the boat. The RNLI publishes a record of every launch: the station, the boat, the time, the weather, what kind of casualty it was and, since the record includes a position, where the boat went. I took the 45,673 launches of the five years 2021 to 2025, about 25 a day, and asked simple questions. Where do the lifeboats go? How far? For whom, and when?</p>
+<div class="byline">Dr Tristan Hotham · Independent researcher · 2026 · Data: RNLI Returns of Service and lifeboat stations, RNLI open data portal (RNLI open data licence) · Natural Earth · Base map: OpenFreeMap Positron</div>
+<div class="stats">
+<div class="stat"><b>4.5 km</b><span>half of all launches went less far than this from the station</span></div>
+<div class="stat"><b>2.6x</b><span>how much further all-weather boats went than inshore boats (medians)</span></div>
+<div class="stat"><b>10.6x</b><span>summer over winter launches to motorboats and yachts; commercial casualties 2.2x</span></div>
+<div class="stat"><b>6.7%</b><span>of all launches came from one station, Tower, on the Thames in London</span></div>
+</div>
+
+<h2><span class="n">01 · Where</span>Close to home</h2>
+<p>The launches hug the coast. Half of them went less than 4.5 km from the station, as the crow flies, and 77% less than 10 km. Only 7.6% went more than 20 km. They are also bunched: on a grid of 2 km squares, half of all located launches fell in just 599 of the 9,689 squares that had any (6.2%).</p>
+<p>The busiest place of all is not on the sea. Tower lifeboat station, on the Thames in central London, launched 3,077 times in five years, 6.7% of every launch in the data and about 1.7 a day. With the other Thames stations at Chiswick, Teddington and Gravesend, the river accounts for 11.8% of all launches. The three busiest 2 km squares are all on the Thames near Tower.</p>
+<div class="figure"><img src="img/map.jpg" alt="Map of Britain and Ireland with lifeboat launches counted on 4 km squares: a thin orange band follows every coast, darkest along the south coast of England, the Thames, the Firth of Forth and the Irish Sea coasts" loading="lazy"><p class="src">Located launches counted on 4 km squares (log scale); rings are stations sized by launches.</p></div>
+
+<h2><span class="n">02 · How far</span>Big boats go further</h2>
+<p>The RNLI has two main kinds of boat. All-weather lifeboats are large, fast, self-righting boats built for any sea. Inshore lifeboats are rigid or inflatable boats for shallow water, surf and rocks. The difference shows: the median inshore launch went 3.5 km, the median all-weather launch 9.3 km. Comparing the two kinds of boat at the same station, in the same month and year, the all-weather boat went 150% further (95% interval 119% to 185%). At 67 of the 68 stations with at least 30 launches of each kind, the all-weather boat's median trip was the longer one.</p>
+<p>Fishing boats and other commercial casualties were reached further out than people in the water, by 27% at the same station (95% interval 16% to 40%). I expected motorboats and yachts to be further out too, but they were not: -4% (interval -11% to 4%).</p>
+<div class="figure"><img src="img/dist.jpg" alt="Two charts: the share of launches within each distance of the station, with inshore boats reaching half their launches by 3.5 km and all-weather boats by 9.3 km; and median distances by casualty group, commercial furthest" loading="lazy"><p class="src">Straight-line distance from station to incident. Right: medians with station-level bootstrap intervals.</p></div>
+
+<h2><span class="n">03 · When</span>Summer, weekends and afternoons</h2>
+<p>August is the busiest month, with about 45 launches a day against 12 in January. But the summer rush belongs to leisure. Launches to motorboats, yachts and dinghies ran 10.6 times as high in June to August as in December to February, paddleboards, kayaks and other boards 6.9 times, people in the water 3.6 times, and commercial casualties only 2.2 times. The weekend tells the same story: a Saturday or Sunday brought 2.0 times the launches of a weekday for paddle and board craft and 1.8 times for powered and sail craft, but 1.16 times for commercial casualties.</p>
+<div class="figure"><img src="img/season.jpg" alt="Line chart of launches by month for six casualty groups, with powered and sail craft and paddle and board craft rising sharply to an August peak and commercial casualties much flatter, beside a bar chart of weekend over weekday rates" loading="lazy"><p class="src">Each group's daily launch rate by month, relative to its own yearly average; right, weekend days against weekdays with 95% intervals.</p></div>
+<p>The busiest hour is 15:00 to 15:59. About 23% of launches happened in the dark (the sun more than 6 degrees below the horizon at the incident), and for people on the shore it was 27%. Paddle and board craft almost never need a lifeboat after dark: 2.4% of their launches. All-weather and inshore boats launched in the dark equally often (23% and 23%), which I did not expect.</p>
+<div class="figure"><img src="img/hour.jpg" alt="Line chart of launches by hour of day for six casualty groups peaking in the afternoon, with a sharp paddle and board peak at 15:00, beside bars showing the share launched in the dark" loading="lazy"><p class="src">Local clock time of launch, and the share launched after civil dusk.</p></div>
+
+<h2><span class="n">04 · Which stations</span>Busy stations are not the ones with most coast</h2>
+<p>A station's patch of coast says almost nothing about how busy it is. I gave every 1 km of coastline to its nearest coastal station. A station with twice as much coast had only about 7% more launches (95% interval -2% to 17%). Stations with an all-weather boat had 26% more launches than inshore-only stations in the same region. Per 10 km of coast, the busiest coastal station is Blackpool (437 launches in five years), against 38 at the median station; the quietest are in Shetland, Harris, the north-west Highlands and the west of Ireland, where one station covers hundreds of kilometres of intricate coast.</p>
+<div class="figure"><img src="img/coast.jpg" alt="Scatter chart of launches against coast length for 228 coastal stations showing almost no relationship, beside a bar chart of the busiest stations per 10 km of coast led by Blackpool, Ramsgate and Torbay" loading="lazy"><p class="src">Coast length depends on the map's detail (here Natural Earth 1:10m); the result holds at 1:50m.</p></div>
+
+<h2><span class="n">05 · Over time</span>Flat, with shifting labels</h2>
+<p>The total barely moved: 8,883 launches in 2021 and 9,080 in 2025, a trend of 0.3% a year (95% interval -1.4% to 2.0%). Most casualty groups fell, including paddle and board craft (-6.2% a year), but at the same time the share of launches recorded with the casualty type "Other" rose from 8% to 21%. Some of the falls may be launches that were simply labelled differently, so I would not read them as real declines. Paddleboards on their own, an extra look I had not planned, showed no clear trend (-0.1% a year, 95% interval -6% to 6%).</p>
+<div class="figure"><img src="img/trend.jpg" alt="Small bar charts of launches per year 2021 to 2025: all launches flat, most groups gently falling, and the other or unknown group rising, with a line showing the share labelled Other climbing from 8 to 21 percent" loading="lazy"><p class="src">Planned trend estimates: Poisson model of monthly counts with calendar-month effects.</p></div>
+
+<h2><span class="n">06 · How I did this</span>Launch records, cleaned and counted</h2>
+<p><b>The records.</b> The RNLI's Returns of Service open data: one row per lifeboat launch, 45,682 rows for 2021 to 2025. I dropped 9 training launches from headquarters and the college. 135 positions had lost the minus sign on their longitude (one Fishguard launch had been placed in the Netherlands) and were flipped back; 23 positions still more than 100 km from an inshore station or 250 km from an all-weather station were left off the map and out of the distances. I wrote down the analysis plan, with the hypotheses and checks, before computing any distance, trend or seasonal pattern.</p>
+<p><b>Distance</b> is a straight line from the station to the incident, not the route the boat took. The boat-type and casualty comparisons are made within stations, with standard errors clustered by station; the boat-type and commercial differences hold across all 14 checks: dropping the river and lake stations, the fixed longitudes, launches stood down before arriving, each region in turn, and more. A placebo that shuffles the boat type within each station gives differences of about zero.</p>
+<p><b>What this cannot say.</b> A launch is not an incident: two boats sent to one yacht make two rows, and many incidents are handled by coastguard helicopters, lifeguards, other services or the public. The position is the incident as recorded by the crew. I do not know how many people were aboard or how serious things were. The map shows launches on 1 km squares, not the individual records, which the RNLI's licence does not let me share.</p>
+<details><summary>Sources and licences</summary>
+<ul class="plain">
+<li>RNLI Returns of Service and RNLI Lifeboat Station Locations, from the RNLI open data portal (ArcGIS Hub), retrieved 2026. RNLI open data licence: the launch records are not redistributed here; the page and data files show aggregates only.</li>
+<li>Coastlines: Natural Earth 1:10m and 1:50m (public domain).</li>
+<li>Base map: OpenFreeMap Positron style (OpenStreetMap, ODbL). MapLibre GL JS 4.7.1 (BSD 3-Clause).</li>
+<li>Text and figures CC BY 4.0; code MIT; derived aggregate data CC BY 4.0 subject to the RNLI's terms for the underlying records.</li>
+</ul></details>
+<div class="cta"><a class="p" href="https://doi.org/10.5281/zenodo.24104520">Read the paper</a><a href="https://github.com/Tristan-Hotham/lifeboat-launches">Data and code</a><a href="https://blog.tristanhotham.com/2026/10/31/lifeboat-launches/">Blog post</a></div>
+<footer>
+<p>Dr Tristan Hotham, Independent researcher. ORCID <a href="https://orcid.org/0000-0003-4931-9349">0000-0003-4931-9349</a>.</p>
+<p>Cite as: Hotham, T. (2026) Where the lifeboats go: distance, timing and workload in RNLI lifeboat launches, 2021 to 2025. Zenodo. <a href="https://doi.org/10.5281/zenodo.24104520">10.5281/zenodo.24104520</a></p>
+<p>Code: <a href="https://github.com/Tristan-Hotham/lifeboat-launches">github.com/Tristan-Hotham/lifeboat-launches</a> (MIT). Text, figures and aggregate data CC BY 4.0.</p>
+<p>I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.</p>
+</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="js/page.js?v=2026a"></script>
+<!-- map-fullscreen v1 -->
+<style id="mfs-style">
+.mfs-btn{position:absolute;top:10px;right:10px;z-index:1001;width:34px;height:34px;border:2px solid rgba(0,0,0,.25);border-radius:4px;background:#fff;color:#222;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.mfs-btn:hover{background:#f2f2f2}
+.mfs-btn svg{width:18px;height:18px}
+.mfs-host.mfs-btn-left .mfs-btn{right:auto;left:54px}
+.mfs-fake{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;height:100dvh!important;max-width:none!important;max-height:none!important;margin:0!important;z-index:100000!important;border-radius:0!important}
+html.mfs-lock,html.mfs-lock body{overflow:hidden!important}
+:fullscreen.mfs-host{width:100vw!important;height:100vh!important;max-width:none!important;max-height:none!important;margin:0!important;border-radius:0!important}
+</style>
+<script id="mfs-script">
+(function(){
+  var ICON_OPEN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+  var ICON_CLOSE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>';
+  function poke(){setTimeout(function(){window.dispatchEvent(new Event('resize'));},60);setTimeout(function(){window.dispatchEvent(new Event('resize'));},400);}
+  function realFS(){return document.fullscreenElement||document.webkitFullscreenElement;}
+  function add(el){
+    if(el.__mfs)return; el.__mfs=1;
+    var cs=getComputedStyle(el); if(cs.position==='static')el.style.position='relative';
+    el.classList.add('mfs-host');
+    // avoid clashing with a top-right Leaflet control (e.g. "Map layers")
+    var tr=el.querySelector('.leaflet-top.leaflet-right');
+    if(tr&&tr.children.length){ el.classList.add('mfs-btn-left'); }
+    var b=document.createElement('button'); b.type='button'; b.className='mfs-btn';
+    b.title='Full screen map'; b.setAttribute('aria-label','Full screen map'); b.innerHTML=ICON_OPEN;
+    ['click','dblclick','mousedown','touchstart','wheel'].forEach(function(t){b.addEventListener(t,function(e){e.stopPropagation();},{passive:t!=='click'});});
+    function setIcon(on){b.innerHTML=on?ICON_CLOSE:ICON_OPEN;b.title=on?'Exit full screen':'Full screen map';b.setAttribute('aria-label',b.title);}
+    function exitFake(){el.classList.remove('mfs-fake');document.documentElement.classList.remove('mfs-lock');setIcon(false);poke();}
+    b.addEventListener('click',function(e){
+      e.preventDefault();
+      if(el.classList.contains('mfs-fake')){exitFake();return;}
+      if(realFS()){(document.exitFullscreen||document.webkitExitFullscreen).call(document);return;}
+      var req=el.requestFullscreen||el.webkitRequestFullscreen;
+      if(req){ try{ var p=req.call(el); if(p&&p.catch)p.catch(function(){el.classList.add('mfs-fake');document.documentElement.classList.add('mfs-lock');setIcon(true);poke();}); }catch(err){el.classList.add('mfs-fake');document.documentElement.classList.add('mfs-lock');setIcon(true);poke();} }
+      else { el.classList.add('mfs-fake');document.documentElement.classList.add('mfs-lock');setIcon(true);poke(); }
+    });
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&el.classList.contains('mfs-fake'))exitFake();});
+    ['fullscreenchange','webkitfullscreenchange'].forEach(function(t){document.addEventListener(t,function(){setIcon(realFS()===el);poke();});});
+    el.appendChild(b);
+  }
+  function scan(){
+    var els=document.querySelectorAll('[data-fullscreen-map], .leaflet-container, .maplibregl-map, .mapboxgl-map');
+    els.forEach(function(el){
+      if(el.closest('.mfs-host')&&!el.classList.contains('mfs-host'))return;
+      var r=el.getBoundingClientRect(); if(r.width<200||r.height<150)return;
+      add(el);
+    });
+  }
+  function start(){scan(); var n=0; var t=setInterval(function(){scan(); if(++n>20)clearInterval(t);},500);}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start); else start();
+})();
+</script>
+<!-- /map-fullscreen -->
+
+<script src="https://maps.tristanhotham.com/assets/site-nav.js" defer></script>
+</body>
+</html>
